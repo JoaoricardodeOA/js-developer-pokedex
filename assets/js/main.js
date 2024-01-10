@@ -1,13 +1,14 @@
 const pokemonList = document.getElementById('pokemonList')
 const loadMoreButton = document.getElementById('loadMoreButton')
 
+
 const maxRecords = 151
 const limit = 10
 let offset = 0;
 
 function convertPokemonToLi(pokemon) {
     return `
-        <li class="pokemon ${pokemon.type}">
+        <li onclick="MyFunction('${pokemon.number}')" class="pokemon ${pokemon.type}">
             <span class="number">#${pokemon.number}</span>
             <span class="name">${pokemon.name}</span>
 
@@ -32,6 +33,8 @@ function loadPokemonItens(offset, limit) {
 
 loadPokemonItens(offset, limit)
 
+
+
 loadMoreButton.addEventListener('click', () => {
     offset += limit
     const qtdRecordsWithNexPage = offset + limit
@@ -45,3 +48,12 @@ loadMoreButton.addEventListener('click', () => {
         loadPokemonItens(offset, limit)
     }
 })
+
+function MyFunction(pokemon){
+    console.log(pokemon)
+    var node = document.getElementById("pokemonList");
+    loadMoreButton.parentElement.removeChild(loadMoreButton)
+    node.parentNode.removeChild(node)
+    var tag = document.querySelector("h1")
+    tag.textContent = "Bulbasaur"
+}
