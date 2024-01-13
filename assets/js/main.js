@@ -27,21 +27,35 @@ function convertPokemonToLi(pokemon) {
 
 function detailedPokemon(pokemon) {
     return `
-                <span class="number">#${pokemon.number}</span>
-                <ol class="types">
-                    ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
+                <div class="${pokemon.type} character">
+                <div class="number-container">
+                    <span class="">#${pokemon.number}</span>
+                </div>
+                <ol class="detail-type">
+                    ${pokemon.types.map((type) => `<li class="types detailed-type">${type}</li>`).join('')}
                 </ol>
-                <img src="${pokemon.photo}"
+                <img class="background-pokemon" src="${pokemon.photo}"
                 alt="${pokemon.name}">
-                <span>About</span>
-                <span>${pokemon.type}</span>
-                <span>${pokemon.weight}</span>
-                <span>${pokemon.height}</span>
-                <span>${pokemon.attack}</span>
-                <span>${pokemon.defense}</span>
-                <ol class="abilities">
-                    ${pokemon.abilities.map((ability) => `<li class="ability">${ability}</li>`).join('')}
-                </ol>
+                </div>
+                <div class="about">
+                <div class="margin-about-title ">
+                 <span class="about-title ${pokemon.type}">About</span>
+                </div>
+                <div class="about-elements">
+                <span>Weigth: ${pokemon.weight}</span>
+                <span>Height: ${pokemon.height}</span>
+                <span>Attack: ${pokemon.attack}</span>
+                <span>Defense: ${pokemon.defense}</span>
+                <div class="abilities">
+                <span class="abilities-wrap">Abilities:</span>
+                <div class="about-abilities">
+                ${pokemon.abilities.map((ability) => `<li class="ability about-ability">${ability}</li>`).join('')}
+                </div>
+                </div>
+                <div class="reload-button">
+                    <button onClick="window.location.reload()">Return to the list</button>
+                </div>
+                </div>
     `
 }
 
@@ -65,6 +79,7 @@ loadMoreButton.addEventListener('click', () => {
         loadPokemonItens(offset, newLimit)
 
         loadMoreButton.parentElement.removeChild(loadMoreButton)
+        
     } else {
         loadPokemonItens(offset, limit)
     }
